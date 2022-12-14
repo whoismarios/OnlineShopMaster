@@ -20,38 +20,6 @@
 <body>
     <?php include 'imports/navImport.php';?>
 
-   
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>                        
-            </button>
-            <a id="navbar-brand" class="navbar-brand" href="../index.php">softdrinks.com</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="alleArtikel.php">Alle Artikel</a></li>
-                <li><a href="meinProfil.php">
-                    <?php 
-
-                    if(isset($_SESSION['id'])){
-                        echo $_SESSION['vorname'];
-                    }else{
-                            echo "Mein Profil";
-                        }
-                    ?></a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="signUp.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li class="active"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
-            </div>
-        </div>
-    </nav>
 
     <section>
         <h1 class="homeH1">Login</h1>
@@ -70,7 +38,7 @@
                     <div class="col-md-6 col-lg-7 d-flex align-items-center">
                     <div class="card-body p-4 p-lg-5 text-black">
 
-                        <form method="POST" action="checkLogin.php">
+                        <form class="loginForm" method="POST" action="checkLogin.php">
 
                             <div class="d-flex align-items-center mb-3 pb-1">
                                 <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -80,12 +48,12 @@
                             <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;" id="loginH5">Login</h5>
 
                             <div class="form-outline mb-4">
-                                <input for="email" name="email" type="email" class="form-control form-control-lg" />
+                                <input style="font-size: 22px; font-weight:bolder;" for="email" name="email" type="email" class="form-control form-control-lg" />
                                 <label class="form-label" for="email">Email Adresse</label>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input for="password" name="password" type="password" class="form-control form-control-lg" />
+                                <input style="font-size: 18px; font-weight: bolder;" for="password" name="password" type="password" class="form-control form-control-lg" />
                                 <label class="form-label" for="password">Passwort</label>
                             </div>
 

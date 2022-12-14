@@ -9,7 +9,7 @@
             'localhost',
             'root',
             '',
-            'getraenkeHandel'
+            'getraenkeHandel2'
         );
 
         if (MySQLi_connect_errno()) {
@@ -39,7 +39,7 @@
             }
 
         }catch(Exception $e){
-
+            echo "Fehler: ".$e;
         }
 
 

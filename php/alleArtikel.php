@@ -104,9 +104,11 @@
             $("#search").keyup(function(){
                 var input = $(this).val();
 
+                console.log(input);
+
                 if(input != ""){
                     $.ajax({
-                        url: "php/ajax/searchAjax.php",
+                        url: "ajax/searchAjax.php",
                         method: "POST",
                         data: {
                                 search: input

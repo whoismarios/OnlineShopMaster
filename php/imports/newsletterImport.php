@@ -18,24 +18,24 @@
 
     <script>
 
-        let input = document.getElementById('newsletterEmail').value;
-        let display = document.getElementById('responseDisplay');
+        let input2 = document.getElementById('newsletterEmail').value;
+        let display2 = document.getElementById('responseDisplay');
 
         function addToNewsletter() {
 
-            let input = document.getElementById('newsletterEmail').value;
-            let display = document.getElementById('responseDisplay');
+            let input2 = document.getElementById('newsletterEmail').value;
+            let display2 = document.getElementById('responseDisplay');
         
 
-            if(input == ""){
-                display.textContent = "Bitte gib eine valide E-Mail Adresse an!";
+            if(input2 == ""){
+                display2.textContent = "Bitte gib eine valide E-Mail Adresse an!";
             }else {
-                display.textContent="";
+                display2.textContent="";
                 $.ajax({
                     url : "ajax/newsletterAjax.php",
                     method : "POST",
                     data:{
-                        email: input
+                        email: input2
                     },
                     success: function(data){
                         $("#responseDisplay").html(data);

@@ -1,5 +1,5 @@
 <?php
-    $dbDatabasename = 'getraenkeHandel';
+    $dbDatabasename = 'getraenkeHandel2';
     $dbLoginUsername = 'root';
     $dbPassword = '';
 

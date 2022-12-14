@@ -127,10 +127,8 @@ ALTER TABLE `Newsletter`
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
---
-
---
--- AUTO_INCREMENT für Tabelle `artikel`
+--SQL-Befehl(e) in Tabelle getraenkeHandel2.kunde ausführen: Dokumentation
+- AUTO_INCREMENT für Tabelle `artikel`
 --
 ALTER TABLE `artikel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;

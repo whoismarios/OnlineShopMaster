@@ -172,3 +172,6 @@ body{
     text-align: center;
     width: 100%;
 }
+.loginForm div input[type=email]{
+    font-size: 24px;
+}

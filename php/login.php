@@ -48,13 +48,18 @@
                             <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;" id="loginH5">Login</h5>
 
                             <div class="form-outline mb-4">
-                                <input style="font-size: 22px; font-weight:bolder;" for="email" name="email" type="email" class="form-control form-control-lg" />
+                                <input placeholder="Email" style="font-size: 22px; font-weight:bolder;" for="email" name="email" type="email" class="form-control form-control-lg" />
                                 <label class="form-label" for="email">Email Adresse</label>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input style="font-size: 18px; font-weight: bolder;" for="password" name="password" type="password" class="form-control form-control-lg" />
+                                <input placeholder="Passwort" style="font-size: 18px; font-weight: bolder;" for="password" name="password" type="password" class="form-control form-control-lg" />
                                 <label class="form-label" for="password">Passwort</label>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input placeholder="2FA-Code" style="font-size: 18px; font-weight: bolder;" for="2FA" name="2FA" type="password" class="form-control form-control-lg" />
+                                <label class="form-label" for="password">2FA - Code</label>
                             </div>
 
                             <div class="pt-1 mb-4">

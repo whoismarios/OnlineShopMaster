@@ -4,6 +4,8 @@
     require '../libraries/PHPMailer/src/PHPMailer.php';
     require '../libraries/PHPMailer/src/SMTP.php';
 
+    require_once '../libraries/GoogleAuthenticator-master/PHPGangsta/GoogleAuthenticator.php';
+
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
          
@@ -17,9 +19,7 @@
     $plz="";
     $city="";
     $land="Deutschland";
-    $hasNewPassword=0;
-
-   
+    $hasNewPassword=0;   
 
     try{
 
@@ -36,12 +36,17 @@
             $bytes = openssl_random_pseudo_bytes(4);
             $password = bin2hex($bytes);
 
+            $ga = new PHPGangsta_GoogleAuthenticator();
+            $secret = $ga->createSecret();
+
+            $qrCodeUrl = $ga->getQRCodeGoogleUrl('softdrinks.com - 2FA', $secret);
+
 
             try{
 
-                $sql = "INSERT INTO kunde (vorname, nachname, email, password, lastLogin, online, street, plz, city, land, hasNewPassword) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                $sql = "INSERT INTO kunde (vorname, nachname, email, password, lastLogin, online, street, plz, city, land, hasNewPassword, secret) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$vorname, $nachname, $email, $password, $lastLogin, $online, $street, $plz, $city, $land, $hasNewPassword]);
+                $stmt->execute([$vorname, $nachname, $email, $password, $lastLogin, $online, $street, $plz, $city, $land, $hasNewPassword, $secret]);
 
             } catch(PDOException $f){
                 echo "Fehler: ".$f;
@@ -73,26 +78,32 @@
                     $mail->isHTML(true);                                  //Set email format to HTML
                     $mail->Subject = 'New One-Way-Password for your Account';
                     $mail->Body    = '
-                                    <div style="text-align: center; backgound-color: black; color: white; width: 90%; padding-left: 5%; margin: 5px;">
+                                    <div style="text-align: center; backgound-color: white; color: black; width: 90%; padding-left: 5%; margin: 5px;">
                                       <h2 style="color: white;">softdrinks.com</h2>
-                                      <br><br>
+                                      
                                       <h5>Du hast erfolgreich ein neues Konto angelegt. <br> Anbei die von dir angegebenen Daten, <br> sowie das One-Way-Passwort.</h5>
                                       <br>
-                                      <h3> Vorname: </h3> <h4>'.$vorname.'</h4> 
+                                      <h3> Vorname: '.$vorname.'</h3> 
                                       <br>
-                                      <h3> Nachname: </h3> <h4>'.$nachname.'</h4>
+                                      <h3> Nachname: '.$nachname.'</h3>
                                       <br>
-                                      <h3> Adresse: </h3> <h4>'.$street.'  '.$plz.'   '.$city.'   '.$land.'</h4>
+                                      <h3> Adresse: '.$street.'  '.$plz.'   '.$city.'   '.$land.'</h3>
+                                      <h3> E-Mail: '.$email.'</h3>
+                                      <h3> One-Way-Passwort: '.$password.'</h3>
                                       <br>
-                                      <h3> E-Mail: </h3> <h4>'.$email.'</h4>
+                                      <h4>Scannen Sie bitte folgenden QR-Code in der <br> Google Authenticator - App für die Zwei-Faktor-Authentifizierung:</h4> 
                                       <br>
-                                      <h3> One-Way-Passwort: </h3> <h4>'.$password.'</h4>
-
-                                      <br><br><br>
-                                      <h6>Bitte klicke auf den folgenden <a style="color: red;" href="localhost/OnlineShopMaster/php/setNewPassword.php">Link</a> und erstelle <br> dein neues Passwort</h6>
-                                      <br><br>
+                                      <img style="width: 200px; height: 200px;" src="'.$qrCodeUrl.'" />
+                                      <br>
+                                      <h5>Hier klicken, falls kein QR-Code angezeigt wird: <br> '.$qrCodeUrl.'</h5>
+                                      <br>
+                                      <h4>Oder sie pflegen den folgenden Code manuell ein: </h4>
+                                      <br>
+                                      <h3><strong>'.$secret.'</strong></h3>
+                                      <h3>Bitte klicke auf den folgenden <a style="color: black;" href="localhost/OnlineShopMaster/php/setNewPassword.php" > Link </a> und erstelle <br> dein neues Passwort</h3>
+                                      <br>
                                       <h3>Beste Grüße</h3>
-                                      <br><br>
+                                      <br>
                                       <h3>Ihr softdrinks.com - Team</h3>
                                     </div>
                                       ';

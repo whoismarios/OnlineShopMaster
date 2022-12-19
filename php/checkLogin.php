@@ -1,14 +1,19 @@
 <?php
 
+    require_once '../libraries/GoogleAuthenticator-master/PHPGangsta/GoogleAuthenticator.php';
+
     $loginSucess = false;
 
     $email = "";
     $password = "";
     $newLastLogin = date("r");
+    $twoFACode = "";
+    $ga = new PHPGangsta_GoogleAuthenticator();
 
-    if(isset($_POST['email']) && isset($_POST['password'])){
+    if(isset($_POST['email']) && isset($_POST['password']) && isset ($_POST['2FA'])){
         $email = $_POST['email'];
         $passwordF = $_POST['password'];
+        $twoFACode = $_POST['2FA'];
 
         $password = hash('sha512', $passwordF);
     }
@@ -22,6 +27,11 @@
             
             $dbEmail = $row['email'];
             $dbPassword = $row['password'];
+            $dbSecret = $row['secret'];
+
+            $oneCode = $ga->getCode($dbSecret);
+
+            $checkResult = $ga->verifyCode($dbSecret, $oneCode, 2);
 
             session_start();
 
@@ -31,7 +41,7 @@
             $_SESSION['email'] = $row['email'];
             $_SESSION['lastLogin'] = $row['lastLogin'];
      
-            if($email == $dbEmail && $password == $dbPassword){
+            if($email == $dbEmail && $password == $dbPassword && $checkResult){
                 $loginSucess = true;
             }else{
                 $loginSucess=false;
@@ -53,18 +63,6 @@
         }else{
             $conn = null;
             header("Location: login.php");
-            /*echo $sql;
-            echo "<br>";
-            echo $sql2;
-            echo "<br>";
-            echo $dbEmail;
-            echo "<br>";
-            echo $dbPassword;
-            echo "<br>";
-            echo $password;
-            echo "<br>";
-            echo $email;
-            echo "<br>";*/
         }
 
     }catch(PDOException $e){

@@ -33,15 +33,15 @@
 
             $checkResult = $ga->verifyCode($dbSecret, $oneCode, 2);
 
-            session_start();
+            /*session_start();
 
             $_SESSION['id'] = $row['id'];
             $_SESSION['vorname'] = $row['vorname'];
             $_SESSION['nachname'] = $row['nachname'];
             $_SESSION['email'] = $row['email'];
-            $_SESSION['lastLogin'] = $row['lastLogin'];
-     
-            if($email == $dbEmail && $password == $dbPassword && $checkResult){
+            $_SESSION['lastLogin'] = $row['lastLogin']; */
+
+            if($email == $dbEmail && $password == $dbPassword && $oneCode == $twoFACode){
                 $loginSucess = true;
             }else{
                 $loginSucess=false;
@@ -50,6 +50,15 @@
         }
 
         if($loginSucess){
+
+            session_start();
+
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['vorname'] = $row['vorname'];
+            $_SESSION['nachname'] = $row['nachname'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['lastLogin'] = $row['lastLogin'];
+
             try{
                 $sql2 = "UPDATE kunde SET lastLogin='".$newLastLogin."' WHERE email='".$email."'";   
                 $stmt2 = $conn->prepare($sql2);

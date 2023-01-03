@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>softdrinks.com - Ihre Rechnung</title>
+
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/barley-script-personal-use');
+        @import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe&display=swap');
+
+        *{
+            font-size: 20px;
+            font-family: 'Alumni Sans Pinstripe';
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .logo{
+            font-family: 'Barley Script PERSONAL USE', sans-serif;
+        font-size: 40px;
+        }
+        hr{
+            width: 80%;
+            margin-left: 10%;
+            opacity: 0.8;
+        }
+        .title{
+            font-size: 25px;
+            font-family: 'Alumni Sans Pinstripe';
+            font-weight: 800;
+            text-align: center;
+        }
+        .infoBox{
+            display: flex;
+            justify-content: space-evenly;
+        }
+        table{
+            width: 100%;
+        }
+        tr th, tr td {
+            height: 50px;
+        }
+        .bestaetigt{
+            width: 100%;
+        }
+        
+    </style>
+</head>
+<body style="margin: 0; padding:0; font-family: 'Times New Roman', Times, serif;">
+
+    <div style="width: 100%; height: auto; min-height: 500px; background-color: beige;">
+        <br>
+        <h1 class="logo" style="text-align: center;">softdrinks.com</h1>
+        <br>
+        <hr>
+        <h3 class="title">Ihre Rechnung</h3>
+        <br>
+        <div class="infoBox">
+            <div class="boxLeft">
+                <p><strong>Vorname: </strong>Marios</p>
+                <p><strong>Nachname: </strong>Tzialidis</p>
+                <p><strong>Bestellnummer: </strong>123456789</p>
+                <p><strong>Lieferadresse: </strong>Teststraße 4 72072 Tübingen</p>
+                <p><strong>Email: </strong>mario.tzialidis@googlemail.com</p>
+            </div>
+            <div class="boxRight">
+                <p><strong>Datum: </strong><p id="datum2"></p></p>
+                <p><strong>Versandkosten: </strong>15 €</p>
+                <p><strong>Versandart: </strong>DPD Versand</p> 
+                <p><strong>Gesamtsumme: </strong>120 €</p>
+            </div>
+        </div>
+        <hr>
+        <div class="orderContent">
+            <table>
+                <tr>
+                    <th>Artikel</th>
+                    <th>Menge</th>
+                    <th>Preis in €</th>
+                </tr>
+                
+                <tr>
+                    <td>Cola 1 Liter</td>
+                    <td>10</td>
+                    <td>12</td>
+                </tr>
+                
+                <tr>
+                    <td>Fanta 1 Liter</td>
+                    <td>5</td>
+                    <td>6.75</td>
+                </tr>
+               
+                <tr>
+                    <td>Arizona White Tea</td>
+                    <td>4</td>
+                    <td>7.56</td>
+                </tr>
+                
+                <tr>
+                    <td>Arizona Pomegranete</td>
+                    <td>4</td>
+                    <td>7.56</td>
+                </tr>
+               
+            </table> 
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div class="bestaetigt">
+            <h1 style="font-size: 30px;">Betrag dankend erhalten.</h1><span>&#9989;</span>
+
+
+            <br>
+
+            <h2> Ihr softdrinks.com Team</h2>
+        </div>
+        <br>
+        <hr>
+        <footer>
+            <p> Diese Rechnung wurde am <strong id="datum"></strong> automatisch generiert.</p>
+            <p> © Marios Tzialidis, Kevin Koch</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('datum').innerHTML =new Date().toLocaleDateString('de-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) ;
+        document.getElementById('datum2').innerHTML =new Date().toLocaleDateString('de-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) ;
+    </script>
+</body>
+</html>
